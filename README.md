@@ -202,7 +202,7 @@ public class ResponseHandler {
 
 # 3 API 接口及实现
 
-这里整理了常用的14种常见的Azkaban的API，在使用Java实现之前，使用Postman测试过，并生成了一份postman的接口文档，可以访问https://documenter.getpostman.com/view/2759292/S1TbUaeU查看。
+这里整理了常用的14种常见的Azkaban的API，在使用Java实现之前，使用Postman测试过，并生成了一份postman的接口文档，可以访问https://documenter.getpostman.com/view/2759292/S1TbUaeU
 
 ![](https://raw.githubusercontent.com/shirukai/images/master/6e4eb4f5377833b57f2c636461f9bdbd.jpg)
 
