@@ -1,4 +1,4 @@
-package com.azkaban.response;
+package com.azkaban.azkabanResponse;
 
 /**
  * Created by shirukai on 2019-06-04 10:13

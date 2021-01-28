@@ -1,4 +1,4 @@
-package com.azkaban.response;
+package com.azkaban.azkabanResponse;
 
 import java.util.List;
 

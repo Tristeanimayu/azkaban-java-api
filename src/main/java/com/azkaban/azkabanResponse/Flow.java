@@ -1,4 +1,4 @@
-package com.azkaban.response;
+package com.azkaban.azkabanResponse;
 
 public class Flow{
     private String flowId;

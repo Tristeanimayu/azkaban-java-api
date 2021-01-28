@@ -1,6 +1,6 @@
 package com.azkaban.api;
 
-import com.azkaban.response.*;
+import com.azkaban.azkabanResponse.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.fluent.Form;
@@ -32,8 +32,7 @@ public class AzkabanApiImpl implements AzkabanApi {
     private static final String FETCH_FLOW_EXECUTIONS = "{0}/manager?ajax=fetchFlowExecutions&session.id={1}" +
             "&project={2}&flow={3}&start={4}&length={5}";
     private static final String FETCH_ALL_PROJECTS = "{0}/index?ajax=fetchuserprojects&session.id={1}";
-    private static final String SCHEDULE_CRON_FLOW = "{0}/schedule?ajax=scheduleCronFlow&session.id={1}&" +
-            "projectName={2}&flow={3}&cronExpression={4}";
+    private static final String SCHEDULE_CRON_FLOW = "{0}/schedule?ajax=scheduleCronFlow&session.id={1}&projectName={2}&flow={3}&cronExpression={4}";
     private static final String FETCH_SCHEDULE = "{0}/schedule?ajax=fetchSchedule&session.id={1}&projectId={2}&flowId={3}";
 
     public AzkabanApiImpl(String uri, String username, String password) {
@@ -100,9 +99,24 @@ public class AzkabanApiImpl implements AzkabanApi {
         return ResponseHandler.handle(res, FetchFlowsResponse.class);
     }
 
+
     @Override
     public ExecuteFlowResponse executeFlow(String projectName, String flowName) {
         Request res = Request.Post(MessageFormat.format(EXECUTE_FLOW, uri, sessionId, projectName, flowName));
+        return ResponseHandler.handle(res, ExecuteFlowResponse.class);
+    }
+
+    @Override
+    public ExecuteFlowResponse executeFlowParam(String projectName, String flowName) {
+        Request res = Request.Post(uri + "/executor?ajax=executeFlow")
+                .bodyForm(Form.form()
+                        .add("session.id", sessionId)
+                        .add("project", projectName)
+                        .add("flow", flowName)
+                        .add("failureAction", "finishPossible")
+                        .add("flowOverride[hello]", "hello")
+                        .add("flowOverride[world]", "world")
+                        .build());
         return ResponseHandler.handle(res, ExecuteFlowResponse.class);
     }
 
@@ -142,15 +156,26 @@ public class AzkabanApiImpl implements AzkabanApi {
 
     @Override
     public FetchAllProjectsResponse fetchAllProjects() {
-        Request res = Request.Get(MessageFormat.format(FETCH_ALL_PROJECTS, sessionId));
+        Request res = Request.Get(MessageFormat.format(FETCH_ALL_PROJECTS,uri,sessionId));
         return ResponseHandler.handle(res, FetchAllProjectsResponse.class);
     }
 
     @Override
     public ScheduleCronFlowResponse scheduleCronFlow(String projectName, String flowName, String cronExpression) {
-        Request res = Request.Post(
-                MessageFormat.format(SCHEDULE_CRON_FLOW, uri, sessionId, projectName, flowName, cronExpression)
-        );
+
+        //拼接url方法失效,原因未知
+        //Request res = Request.Post(
+        //        MessageFormat.format(SCHEDULE_CRON_FLOW, uri, sessionId, projectName, flow, cronExpression)
+        //);
+
+        Request res = Request.Post(uri + "/schedule")
+                .bodyForm(Form.form()
+                        .add("ajax", "scheduleCronFlow")
+                        .add("session.id", sessionId)
+                        .add("projectName", projectName)
+                        .add("flow", flowName)
+                       .add("cronExpression", cronExpression)
+                        .build());
         return ResponseHandler.handle(res, ScheduleCronFlowResponse.class);
     }
 

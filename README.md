@@ -44,7 +44,7 @@ what?怎么还有个status？意义何在，响应成功，我就给你返回一
 BaseResponse内容如下，其中为了映射Azkaban的响应，既包含了"status"又包含了"error"，最后通过correction会更正信息到"status"，所以我们可以统一对"status"进行判断是否执行成功。内容如下：
 
 ```java
-package com.azkaban.response;
+package com.azkaban.azkabanResponse;
 
 import java.util.Objects;
 
@@ -116,7 +116,7 @@ public class BaseResponse {
 为了统一响应，这里使用响应处理器，对Azkaban响应进行统一处理，内容如下：
 
 ```java
-package com.azkaban.response;
+package com.azkaban.azkabanResponse;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
@@ -213,7 +213,7 @@ public class ResponseHandler {
 ```java
 package com.azkaban.api;
 
-import com.azkaban.response.*;
+import com.azkaban.azkabanResponse.*;
 
 
 /**
@@ -348,7 +348,7 @@ public interface AzkabanApi {
 ```java
 package com.azkaban.api;
 
-import com.azkaban.response.*;
+import com.azkaban.azkabanResponse.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.fluent.Form;
@@ -533,7 +533,7 @@ package com.azkaban.proxy;
 
 
 import com.azkaban.api.AzkabanApiImpl;
-import com.azkaban.response.BaseResponse;
+import com.azkaban.azkabanResponse.BaseResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

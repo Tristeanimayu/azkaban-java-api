@@ -1,6 +1,6 @@
 package com.azkaban.api;
 
-import com.azkaban.response.*;
+import com.azkaban.azkabanResponse.*;
 
 
 /**
@@ -51,6 +51,15 @@ public interface AzkabanApi {
      * @return ExecuteFlowResponse
      */
     ExecuteFlowResponse executeFlow(String projectName, String flowName);
+
+    /**
+     * 执行flow,带参数
+     *
+     * @param projectName 项目名称
+     * @param flowName    flow名称
+     * @return ExecuteFlowResponseParam
+     */
+    ExecuteFlowResponse executeFlowParam(String projectName, String flowName);
 
     /**
      * 取消执行flow

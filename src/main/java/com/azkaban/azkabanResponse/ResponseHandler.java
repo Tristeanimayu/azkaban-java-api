@@ -1,4 +1,4 @@
-package com.azkaban.response;
+package com.azkaban.azkabanResponse;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
@@ -66,7 +66,9 @@ public class ResponseHandler {
             response.correction();
         } catch (Exception e) {
             try {
-                response = tClass.newInstance();
+                //java9被弃用,改为以下形式
+                //response = tClass.newInstance();
+                response = tClass.getDeclaredConstructor().newInstance();
                 response.setStatus(T.ERROR);
                 response.setError(content);
                 response.correction();

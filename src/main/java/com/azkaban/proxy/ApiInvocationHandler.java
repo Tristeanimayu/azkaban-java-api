@@ -2,7 +2,7 @@ package com.azkaban.proxy;
 
 
 import com.azkaban.api.AzkabanApiImpl;
-import com.azkaban.response.BaseResponse;
+import com.azkaban.azkabanResponse.BaseResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
